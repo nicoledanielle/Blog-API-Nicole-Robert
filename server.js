@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 const postrouter = require('./postrouter');
 
-const {Blogpost} = require('./models');
+const {BlogPosts} = require('./models');
 
 const jsonParser = bodyParser.json();
 const app = express();
@@ -14,7 +14,7 @@ const app = express();
 app.use (morgan('comment'));
 app.use (express.static('public'));
 
-Blogpost.create('Exception handling in async functions', `Async functions was one of the most welcomed new features of JavaScript in recent years. I was so exiceted by async/await, that impulsively bought the domain javascriptasyncfunction.com.
+BlogPosts.create('Exception handling in async functions', `Async functions was one of the most welcomed new features of JavaScript in recent years. I was so exiceted by async/await, that impulsively bought the domain javascriptasyncfunction.com.
 
 One aspect in which async functions really shine when compared to traditional approach is error handling. Error handling is based on another beloved, and more ancient construct, try... catch.
 
@@ -56,7 +56,7 @@ Senior Developer at YOOX Net-A-Porter Group. Passionate about javascript, nodejs
 
  Bologna, Italy   https://brunoscopelliti.com`, 'Bruno Scopelliti', 'NOV 8, 2017');
 
-Blogpost.create('New `util.promisify` in Node.js', `A quick search on npmjs reveals how this topic is at the center of JavaScript developer’s hearts. I used to have too my personal utility to convert Node.js callback-based internals methods into returning-promise ones. 
+BlogPosts.create('New `util.promisify` in Node.js', `A quick search on npmjs reveals how this topic is at the center of JavaScript developer’s hearts. I used to have too my personal utility to convert Node.js callback-based internals methods into returning-promise ones. 
 So I guess this is a big, great news for everyone who’s working with node: Node.js is adding a new utility that does just this at its core, util.promisify.
 
 If you have ever used one of those promisify modules, you won’t be too much surprised by util.promisify; they work almost in the very same way.
@@ -146,7 +146,7 @@ Senior Developer at YOOX Net-A-Porter Group. Passionate about javascript, nodejs
  Bologna, Italy   https://brunoscopelliti.com`, 'Bruno Scopelliti', 'MAY 16, 2017');
 
 app.get('/blog-posts', (req, res) => {
-  res.json(Blogpost.get());
+  res.json(BlogPosts.get());
 });
 
 app.post('/blog-posts', jsonParser, (req, res) => {
@@ -160,7 +160,7 @@ app.post('/blog-posts', jsonParser, (req, res) => {
       }
   }
 
-  const item = Blogpost.create(req.body.title, req.body.author, req.body.content, req.body.publishDate);
+  const item = BlogPosts.create(req.body.title, req.body.author, req.body.content, req.body.publishDate);
   res.status(201).json(item);
   });
 
